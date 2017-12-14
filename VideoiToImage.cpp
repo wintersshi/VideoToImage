@@ -1,34 +1,33 @@
-//ËùĞèÒªµÄopencvÍ·ÎÄ¼ş
+//æ‰€éœ€è¦çš„opencvå¤´æ–‡ä»¶
 #include <opencv2/highgui/highgui.hpp> 
 #include <cv.h>
-//´´½¨ÎÄ¼ş¼ĞËùĞèÒªµÄÍ·ÎÄ¼ş
+//åˆ›å»ºæ–‡ä»¶å¤¹æ‰€éœ€è¦çš„å¤´æ–‡ä»¶
 #include<io.h>
 #include<direct.h>
 
 int main(int argc, char *argv[])
 {
-	//»ñÈ¡±¾µØÊÓÆµÁ÷
-	CvCapture* capture = cvCaptureFromFile(R"(C:\Users\Administrator\Desktop\UAV\UAV_InfraredDd_test1.asf)");
-	int i = 0;	//Ö¡ºÅ
-	IplImage* img = NULL;	//´æ´¢Ö¡Í¼Æ¬
-	char image_name[25];	//Ö¡µÄÃû×Ö£¨Â·¾¶£©
+	//è·å–æœ¬åœ°è§†é¢‘æµ
+	CvCapture* capture = cvCaptureFromFile(R"(C:\Users\Administrator\Desktop\tes.avi)");
+	int i = 0;	//å¸§å·
+	IplImage* img = NULL;	//å­˜å‚¨å¸§å›¾ç‰‡
+	char image_name[25];	//å¸§çš„åå­—ï¼ˆè·¯å¾„ï¼‰
 	cvNamedWindow("RawVideo",CV_WINDOW_AUTOSIZE);
-	//¶ÁÈ¡ºÍÏÔÊ¾ 
+	//è¯»å–å’Œæ˜¾ç¤º 
 	while (1)
 	{
-		img = cvQueryFrame(capture); //»ñÈ¡Ò»Ö¡Í¼Æ¬ 
-		//ÉèÖÃÌø³öwhile£¨1£©Ñ­»·µÄÌõ¼ş
+		img = cvQueryFrame(capture); //è·å–ä¸€å¸§å›¾ç‰‡ 
+		//è®¾ç½®è·³å‡ºwhileï¼ˆ1ï¼‰å¾ªç¯çš„æ¡ä»¶
 		if (img == NULL)
 			break;
-
-		cvShowImage("RawVideo", img); //ÏÔÊ¾Ã¿Ò»Ö¡Í¼Æ¬
-		cvWaitKey(5);				//Ö¡ÂÊ
-		//ÅĞ¶ÏÊÇ·ñ´æÔÚframeÎÄ¼ş¼Ğ£¬Ã»ÓĞÔò´´½¨
+		cvShowImage("RawVideo", img); //æ˜¾ç¤ºæ¯ä¸€å¸§å›¾ç‰‡
+		cvWaitKey(5);				//å¸§ç‡
+		//åˆ¤æ–­æ˜¯å¦å­˜åœ¨frameæ–‡ä»¶å¤¹ï¼Œæ²¡æœ‰åˆ™åˆ›å»º
 		if (_access("../Image", 0) == -1)
 			_mkdir("../Image");
-		//ÎªÃ¿Ò»Ö¡Í¼Æ¬½øĞĞÃüÃû£¬
-		sprintf(image_name, "%s%d%s", "../Image/frame", ++i, ".jpg");//±£´æµÄÍ¼Æ¬Ãû 
-		cvSaveImage(image_name, img); //±£´æÒ»Ö¡Í¼Æ¬ 
+		//ä¸ºæ¯ä¸€å¸§å›¾ç‰‡è¿›è¡Œå‘½åï¼Œ
+		sprintf(image_name, "%s%d%s", "../Image/frame", ++i, ".jpg");//ä¿å­˜çš„å›¾ç‰‡å 
+		cvSaveImage(image_name, img); //ä¿å­˜ä¸€å¸§å›¾ç‰‡ 
 	}
 	cvReleaseImage(&img);
 	cvReleaseCapture(&capture);
